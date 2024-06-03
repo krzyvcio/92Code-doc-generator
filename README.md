@@ -8,10 +8,12 @@
 
 ### Snippets
 
-Make factory
+Make factory & seeder
 
 ```bash
 ./vendor/bin/sail artisan make:factory UserFactory --model=User
+./vendor/bin/sail artisan make:seeder UserSeeder
+
 
 ```
 
