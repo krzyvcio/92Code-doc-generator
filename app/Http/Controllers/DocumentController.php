@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Document;
 
-use App\Http\Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
