@@ -20,6 +20,7 @@ Make factory & seeder
 Seed fresh
 
 ```bash
+./vendor/bin/sail artisan migrate:fresh --seed --drop-tables
 ./vendor/bin/sail artisan migrate:fresh --seed
 ```
 

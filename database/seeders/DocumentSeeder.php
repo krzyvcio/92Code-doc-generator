@@ -22,8 +22,9 @@ class DocumentSeeder extends Seeder
                 "body" => "test",
                 "user_id" => User::first()->id,
                 "slug" => "test",
-                "created_at" => Date::now(),
-                "updated_at" => Date::now(),
+                "created_at" => now(),
+                "updated_at" => now(),
+                "category_id" => 1,
             ]
         );
     }
