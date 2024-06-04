@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 
-class DocumentApiController extends Controller
+class CategoryApiController extends Controller
 {
     public function __construct()
     {

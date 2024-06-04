@@ -40,3 +40,9 @@ composer require --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer
 #use in project folder
 tools/php-cs-fixer/vendor/bin/php-cs-fixer fix app
 ```
+
+Make controller
+
+```
+php artisan make:controller Api/DocumentApiController
+```
