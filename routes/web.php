@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Category\CategoryController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Route::get('/login', function () {
@@ -22,6 +22,8 @@ Route::get('/dashboard', function () {
 ## Category
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+//middleware for CategoryApiController
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/categories', [CategoryApiController::class, 'store'])->name('categories.store');
     Route::put('/categories/{id}', [CategoryApiController::class, 'update'])->name('categories.update');
@@ -35,7 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::view('/documents', 'documents.index')->name('documents.index');
 Route::view('/documents/create', 'documents.create')->name('documents.create');
 Route::view('/documents/{id}/edit', 'documents.edit')->name('documents.edit');
-//midleware for DocumentApiController
+//middleware for DocumentApiController
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/documents', [App\Http\Controllers\Api\DocumentApiController::class, 'store'])->name('documents.store');
     Route::put('/documents/{id}', [App\Http\Controllers\Api\DocumentApiController::class, 'update'])->name('documents.update');

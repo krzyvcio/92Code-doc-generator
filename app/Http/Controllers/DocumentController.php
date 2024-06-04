@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Document;
 
+use App\Models\Category;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class DocumentController extends Controller
     }
     public function create()
     {
-        return view('documents.create');
+        $categories = Category::all();
+        dd($categories);
+        return view('documents.create')->with('categories', $categories);
     }
 
     public function store(Request $request)

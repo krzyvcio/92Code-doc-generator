@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@php
+    $isCreatorActive = request()->is('documents/create');
+    $isDocumentsActive = request()->is('documents');
+@endphp
+
+
+
 @section('content')
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
@@ -12,10 +19,11 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Kreator</a>
+                            <a class="nav-link {{ $isCreatorActive ? 'active' : '' }}" aria-current="page"
+                                href="{{ route('documents.create') }}">Kreator</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Dokumenty</a>
+                            <a class="nav-link {{ $isDocumentsActive ? 'active' : '' }}" href="#">Dokumenty</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">

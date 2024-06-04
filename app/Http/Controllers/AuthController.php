@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -36,10 +38,20 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+
         if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $id = $user->id;
+            //todo make service
+            User::find($id)->update([
+                'api_token' => Str::random(80),
+            ]);
+
+
             $request->session()->regenerate();
             return redirect()->intended('dashboard');
         }
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
@@ -47,6 +59,11 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        $id = Auth::user()->id;
+        User::find($id)->update([
+            'api_token' => null,
+        ]);
+
         Auth::logout();
 
         $request->session()->invalidate();

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnsureTokenIsValid
+class BeforeMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,12 +15,7 @@ class EnsureTokenIsValid
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = auth()->user();
-
-        if ($user && $request->input('token') !== $user->api_token) {
-            // auth()->logout(); //TODO: try this
-            return redirect('home');
-        }
+        //do something before
 
         return $next($request);
     }
