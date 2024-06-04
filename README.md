@@ -29,3 +29,14 @@ Enter to the shell
 ```bash
 ./vendor/bin/sail shell
 ```
+
+php-cs fixer
+
+```bash
+mkdir --parents tools/php-cs-fixer
+
+composer require --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer
+
+#use in project folder
+tools/php-cs-fixer/vendor/bin/php-cs-fixer fix app
+```
