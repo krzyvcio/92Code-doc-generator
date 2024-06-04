@@ -16,8 +16,7 @@ class DocumentController extends Controller
     public function create()
     {
         $categories = Category::all();
-        dd($categories);
-        return view('documents.create')->with('categories', $categories);
+        return view('documents.create', ['categories' => $categories]);
     }
 
     public function store(Request $request)
