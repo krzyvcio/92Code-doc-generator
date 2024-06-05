@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Document;
+namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Document;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,9 @@ class DocumentController extends Controller
 
     public function index()
     {
-        return view('documents.index');
+        $documents = Document::all();
+
+        return view('documents.index', ['documents' => $documents]);
     }
     public function create()
     {
@@ -22,9 +25,15 @@ class DocumentController extends Controller
 
     public function store(Request $request)
     {
-        //get data from request
 
-        dd($request->all());
+
+        $request->all(); // TODO: Add validation
+    }
+
+    public function show($id)
+    {
+        $document =  Document::find($id);
+        return view('documents.show', ['document' => $document]);
     }
 
     public function edit($id)

@@ -15,8 +15,8 @@ class DocumentApiController extends Controller
 
     public function index()
     {
-        $documents = Auth::user()->documents;
-        return response()->json(['categories' => $documents]);
+        $documents = Document::all();
+        return response()->json(['documents' => $documents]);
     }
 
     public function show($id)
