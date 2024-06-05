@@ -3,49 +3,71 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Document;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DocumentApiController extends Controller
 {
+
+    use ValidatesRequests;
+
     public function index()
     {
-        $categories = Auth::user()->categories;
-        return response()->json(['categories' => $categories]);
+        $documents = Auth::user()->documents;
+        return response()->json(['categories' => $documents]);
     }
 
     public function show($id)
     {
-        $category = Auth::user()->categories->find($id);
-        return response()->json($category);
+        $document = Auth::user()->documents->find($id);
+        return response()->json($document);
     }
 
     public function store(Request $request)
     {
-        $category = Auth::user()->categories->create($request->all());
-        return response()->json([
-            'message' => 'Category created successfully',
-            'category' => $category
-        ], 201);
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'category_id' => 'required',
+
+        ]);
+
+        if ($validatedData) {
+            $document = Document::create([
+                'title' => $validatedData['title'], // Provide a value for the 'name' field
+                'body' => $validatedData['body'],
+                'category_id' => $validatedData['category_id'],
+            ]);
+
+            return response()->json([
+                'message' => 'Document created successfully',
+                'document' => $document
+            ]);
+        } else {
+            // Walidacja nie powiodła się, wyświetlaj błędy walidacji
+            return back()->withInput()->withErrors($validatedData);
+        }
     }
 
     public function update(Request $request, $id)
     {
-        $category = Auth::user()->categories->find($id);
-        $category->update($request->all());
+        $document = Auth::user()->documents->find($id);
+        $document->update($request->all());
         return response()->json([
-            'message' => 'Category updated successfully',
-            'category' => $category
+            'message' => 'Document updated successfully',
+            'document' => $document
         ]);
     }
 
     public function destroy($id)
     {
-        $category = Auth::user()->categories->find($id);
-        $category->delete();
+        $document = Auth::user()->documents->find($id);
+        $document->delete();
         return response()->json([
-            'message' => 'Category deleted successfully',
+            'message' => 'Document deleted successfully',
             'id' => $id
-        ], 204);
+        ]);
     }
 }

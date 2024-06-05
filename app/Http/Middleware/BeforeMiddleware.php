@@ -15,7 +15,8 @@ class BeforeMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        //do something before
+
+        // do something
 
         return $next($request);
     }

@@ -44,7 +44,7 @@ class AuthController extends Controller
             $id = $user->id;
             //todo make service
             User::find($id)->update([
-                'api_token' => Str::random(80),
+                'token' => Str::random(80),
             ]);
 
 
@@ -61,7 +61,7 @@ class AuthController extends Controller
     {
         $id = Auth::user()->id;
         User::find($id)->update([
-            'api_token' => null,
+            'token' => null,
         ]);
 
         Auth::logout();

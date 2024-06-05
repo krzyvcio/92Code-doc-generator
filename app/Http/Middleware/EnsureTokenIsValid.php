@@ -17,9 +17,8 @@ class EnsureTokenIsValid
     {
         $user = auth()->user();
 
-        if ($user && $request->input('token') !== $user->api_token) {
-            // auth()->logout(); //TODO: try this
-            return redirect('home');
+        if ($user && $request->input('token') !== $user->token) {
+            throw new \Exception('Invalid token');
         }
 
         return $next($request);

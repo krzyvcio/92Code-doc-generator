@@ -16,12 +16,15 @@ class DocumentController extends Controller
     public function create()
     {
         $categories = Category::all();
+
         return view('documents.create', ['categories' => $categories]);
     }
 
     public function store(Request $request)
     {
-        return $request->all(); // TODO: Add validation
+        //get data from request
+
+        dd($request->all());
     }
 
     public function edit($id)
