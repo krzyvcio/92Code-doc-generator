@@ -38,6 +38,8 @@ Route::get('/documents', [App\Http\Controllers\DocumentController::class, 'index
 Route::get('/documents/create', [App\Http\Controllers\DocumentController::class, 'create'])->name('documents.create');
 Route::get('/documents/{id}/edit', [App\Http\Controllers\DocumentController::class, 'edit'])->name('documents.edit');
 Route::get('/documents/{id}', [App\Http\Controllers\DocumentController::class, 'show'])->name('documents.show');
+Route::put('/documents/{id}', [App\Http\Controllers\DocumentController::class, 'update'])->name('documents.update');
+
 
 // Middleware for DocumentApiController
 Route::middleware('auth:sanctum')->group(function () {
